@@ -21,7 +21,7 @@ def get_images():
     ]
 @app.get("/")
 def home():
-    return {"message": "Willkommen bei der Mafia-Katzen-API! Nutze /random oder /random/url"}
+    return {"message": "Willkommen bei der Mafia-Katzen-API! Nutze /random oder /random/url oder /cats oder /cats/idnummer"}
 
 # 1. Liefert direkt die Bilddatei aus
 @app.get("/random")
