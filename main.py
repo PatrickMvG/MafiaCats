@@ -21,7 +21,7 @@ def get_images():
     ]
 @app.get("/")
 def home():
-    return {"message": "Willkommen bei der Mafia-Katzen-API! Nutze /random oder /random/url oder /cats oder /cats/idnummer"}
+    return {"message": "Willkommen bei der Mafia-Katzen-API! Nutze /random oder /cats oder /cats/{1-15}"}
 
 # 1. Liefert direkt die Bilddatei aus
 @app.get("/random")
@@ -34,19 +34,6 @@ def get_random_image():
     file_path = os.path.join(IMAGE_DIR, selected_image)
     return FileResponse(file_path)
 
-# 2. Liefert ein JSON-Objekt mit der URL zum Bild
-@app.get("/random/url")
-def get_random_url(request: Request):
-    images = get_images()
-    if not images:
-        raise HTTPException(status_code=404, detail="Keine Bilder gefunden")
-    selected_image = random.choice(images)
-    base_url = str(request.base_url).rstrip("/")
-    return {
-        "file_name": selected_image,
-        "url": f"{base_url}/static/{selected_image}",
-    }
-
 # Alle verfügbaren Bilder auflisten
 @app.get("/cats")
 def list_all_cats(request: Request):
@@ -58,6 +45,7 @@ def list_all_cats(request: Request):
             {
                 "id": idx + 1,
                 "filename": filename,
+                ""
                 "url": f"{base_url}/static/{filename}"
             }
             for idx, filename in enumerate(images)
