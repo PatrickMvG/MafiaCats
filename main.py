@@ -21,7 +21,13 @@ def get_images():
     ]
 @app.get("/")
 def home():
-    return {"message": "Willkommen bei der Mafia-Katzen-API! Nutze /random oder /cats oder /cats/{1-15}"}
+    return {
+        "message": "Willkommen bei der Mafia-Katzen-API!",
+        "url": "https://mafiacats.onrender.com/",
+        "random" : "Nutze /random für ein random Bild",
+        "catsAll": "Nutze /cats um das ganze JSON wiederzugeben",
+        "catsSolo":"Nutze /cats/{1-15} um ein einzelnes bild auszugeben"
+    }
 
 # 1. Liefert direkt die Bilddatei aus
 @app.get("/random")
