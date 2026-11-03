@@ -59,7 +59,7 @@ def list_all_cats(request: Request):
     }
 
 
-# Ein bestimmtes Bild anhand seiner ID (1-20) direkt anzeigen
+
 @app.get("/cats/{cat_id}")
 def get_cat_by_id(cat_id: int):
     images = sorted(get_images())
