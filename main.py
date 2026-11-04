@@ -62,7 +62,7 @@ def list_all_cats(request: Request):
 
 
 
-app.get("/cats/all", response_class=HTMLResponse)
+app.get("/catss", response_class=HTMLResponse)
 def get_all_cats(request: Request):
     images = sorted(get_images())
     if not images:
