@@ -60,20 +60,7 @@ def list_all_cats(request: Request):
 
 
 
-@app.get("/cats/{cat_id}")
-def get_cat_by_id(cat_id: int):
-    images = sorted(get_images())
 
-    # Prüfen, ob die ID im gültigen Bereich liegt
-    if cat_id < 1 or cat_id > len(images):
-        raise HTTPException(
-            status_code=404,
-            detail=f"Katze mit ID {cat_id} nicht gefunden. Gültige IDs: 1 bis {len(images)}."
-        )
-
-    selected_image = images[cat_id - 1]
-    file_path = os.path.join(IMAGE_DIR, selected_image)
-    return FileResponse(file_path)
 
 app.get("/cats/all", response_class=HTMLResponse)
 def get_all_cats(request: Request):
@@ -211,3 +198,19 @@ def get_all_cats(request: Request):
     </html>
     """
     return HTMLResponse(content=html_content)
+
+
+@app.get("/cats/{cat_id}")
+def get_cat_by_id(cat_id: int):
+    images = sorted(get_images())
+
+    # Prüfen, ob die ID im gültigen Bereich liegt
+    if cat_id < 1 or cat_id > len(images):
+        raise HTTPException(
+            status_code=404,
+            detail=f"Katze mit ID {cat_id} nicht gefunden. Gültige IDs: 1 bis {len(images)}."
+        )
+
+    selected_image = images[cat_id - 1]
+    file_path = os.path.join(IMAGE_DIR, selected_image)
+    return FileResponse(file_path)
